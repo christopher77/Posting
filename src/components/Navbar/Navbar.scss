@@ -1,0 +1,51 @@
+.navbar__container{
+  display: flex;
+  background-color: aqua;
+  height: 8vh;
+  align-items: center;
+
+  &>*{
+    // background-color: brown;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 10vw;
+    padding-left: 20px;
+  }
+  &--logo{
+  }
+
+  &--public{
+
+  }
+
+  &--menu{
+    position: relative;
+    cursor: pointer;
+  }
+}
+
+.dropdown{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  background-color: coral;
+  overflow: hidden;
+  left: 0;
+  width: 10vw;
+}
+
+.menu__item{
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding-left: 20px;
+
+
+  &:hover{
+    background-color:darkgreen;
+    color: aliceblue;
+  }
+}
