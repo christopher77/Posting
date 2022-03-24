@@ -2,8 +2,8 @@ import {createSlice } from '@reduxjs/toolkit';
 
 const  initialState = {
   value:[{
-    name:"nombre ejemplo",
-    content:"contenido ejemplo",
+    name:"Primer Post titulo",
+    content:"Comentario contenido del primer post de ejemplo",
     email:"ejemplo@mail.com"
   }],
   // name:string

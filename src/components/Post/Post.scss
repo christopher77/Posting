@@ -1,0 +1,32 @@
+.post{
+	margin: 0 auto;
+	padding: 3rem;
+	font-size: 2.5vh;
+
+  &__punctuation{
+    display: flex;
+    
+    & > * {
+      margin-right: 1vw;
+    }
+  }
+
+  &__sub{
+    display: flex;
+    height: 3vh;
+
+    & > * {
+      margin-right: 1vw;
+      cursor: pointer;
+    }
+    &--img{
+
+    }
+    &--comment{
+
+    }
+    &--link{
+
+    }
+  }
+}

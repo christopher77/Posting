@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import PostList from '../../components/PostList/PostList';
 import {selectPostsList} from '../../features/postSlice'
 
 function Home(props) {
@@ -8,16 +9,14 @@ function Home(props) {
   console.log("postsList==>",postsList)
   return (
     <div className='postscontainer'>
-      HOME-PostList
-      <div className='postslist'>
-        {postsList.map((post,index)=>{
-          return <div key={index}>
-            <div>{post.name}</div>
-            <div>{post.content}</div>
-            <div>{post.email}</div>
-          </div>
-        })}
-      </div>
+      {/* {postsList && postsList.map((post,index)=>{
+        return <div key={index}>
+          <div>{post.name}</div>
+          <div>{post.content}</div>
+          <div>{post.email}</div>
+        </div>
+      })} */}
+      {postsList && <PostList data={postsList}/>}
     </div>
   );
 }

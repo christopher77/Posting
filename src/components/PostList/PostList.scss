@@ -1,0 +1,15 @@
+.postlist{
+  margin: 0 auto;
+  width: 45vw;
+  background-color: rgb(233, 252, 246);
+
+  &__title{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		font-size: 6vh;
+		padding-top: 2rem;
+		color: #126fe9;
+  }
+}
