@@ -3,9 +3,14 @@ import likeCheck from "../../images/heart-solid.svg";
 import like from "../../images/heart-regular.svg";
 import dislikeCheck from "../../images/dislike-solid.svg";
 import dislike from "../../images/dislike.svg";
-import comment from "../../images/comment-regular.svg";
+import commentIcon from "../../images/comment-regular.svg";
 import link from "../../images/link-solid.svg";
+import Modal from "../Modal/Modal";
 import "./Post.scss";
+import SimpleInput from '../SimpleInput/SimpleInput';
+import {addComentToPost} from "../../features/postSlice"
+import { useDispatch } from 'react-redux';
+import {v4 as uuid} from "uuid"
 
 function Post(props) {
   console.log("post props==>",props)
@@ -15,6 +20,10 @@ function Post(props) {
 	const [postDisliked, setPostDisliked] = useState(false);
 	const [likeNumber, setLikeNumber] = useState(likes);
 	const [dislikeNumber, setDislikeNumber] = useState(dislikes);
+	const [showModal, setShowModal] = React.useState(false);
+  const [name,setName] = useState("")
+  const [comment,setComment] = useState("")
+  const [email,setEmail] = useState("")
 
   const {post} = props;
   const changeLike = () => {
@@ -26,7 +35,43 @@ function Post(props) {
 		setPostDisliked(!postDisliked);
 		setDislikeNumber(postDisliked ? dislikes : dislikes + 1);
 	};
+  const openModal = () => {
+		setShowModal(true);
+	};
 
+	const closeModal = () => {
+		setShowModal(false);
+	};
+
+  const propsName = {
+		nombre: "Nombre",
+		tipo: "string",
+		max: 50,
+		complex: false,
+		setProperty: setName,
+	};
+  const propsComment = {
+		nombre: "Comentario",
+		tipo: "string",
+		max: 50,
+		complex: false,
+		setProperty: setComment,
+	};
+  const propsEmail = {
+		nombre: "Email",
+		tipo: "string",
+		max: 50,
+		complex: false,
+		setProperty: setEmail,
+	};
+
+  const dispatch = useDispatch();
+  function handleAddComment(event) {
+		event.preventDefault();
+    console.log("post props ==>",props)
+    dispatch(addComentToPost({id:post.id,name,comment,email}));
+    closeModal()
+	}
   return (
     <div className='post'>
       <div className='post__owner'>Posted by: {post.email}</div>
@@ -52,10 +97,24 @@ function Post(props) {
 					alt="dislike"
 					onClick={() => changeDislike()}
         />
-				<img className="post__sub--comment" src={comment} alt="comments" />
+				<img className="post__sub--comment" src={commentIcon} alt="comments" onClick={() => openModal()} />
         <img className="post__sub--link" src={link} alt="link" />
       </div>
       <div className='post__date'>Posted: 12/08/2019</div>
+      {showModal && (
+				<Modal>
+          <div>Nuevo Comentario</div>
+          <SimpleInput {...propsName}/>
+          <SimpleInput {...propsComment}/>
+          <SimpleInput {...propsEmail}/>
+					<button className="modal__button" onClick={handleAddComment}>
+						AGREGAR
+					</button>
+					<button className="modal__button" onClick={() => closeModal()}>
+						CANCEL
+					</button>
+				</Modal>
+			)}
     </div>
   );
 }

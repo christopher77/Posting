@@ -3,6 +3,7 @@ import "./CreatePost.scss";
 import SimpleInput from "../../components/SimpleInput/SimpleInput";
 import {addPost} from '../../features/postSlice'
 import { useDispatch } from "react-redux";
+import {v4 as uuid} from "uuid"
 
 function CreatePost(props) {
   const [namePost,setNamePost] = useState("")
@@ -37,7 +38,7 @@ function CreatePost(props) {
   function handleAddPost(event) {
 		event.preventDefault();
     // console.log("values==>",values)
-    dispatch(addPost({name:namePost,content:contentPost,email:emailPost}));
+    dispatch(addPost({id:uuid(),name:namePost,content:contentPost,email:emailPost,comments:[],}));
     // cleanForm();
 	}
 
