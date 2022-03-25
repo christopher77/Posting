@@ -7,10 +7,8 @@ const  initialState = {
     content:"Comentario contenido del primer post de ejemplo",
     email:"ejemplo@mail.com",
     comments:[],
+    date:"5 feb. 2022",
   }],
-  // name:string
-  // content:string
-  // email:string
 }
 
 export const postSlice = createSlice({

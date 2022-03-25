@@ -4,6 +4,8 @@ import SimpleInput from "../../components/SimpleInput/SimpleInput";
 import {addPost} from '../../features/postSlice'
 import { useDispatch } from "react-redux";
 import {v4 as uuid} from "uuid"
+import moment from 'moment';
+import 'moment/locale/es';
 
 function CreatePost(props) {
   const [namePost,setNamePost] = useState("")
@@ -37,27 +39,19 @@ function CreatePost(props) {
 
   function handleAddPost(event) {
 		event.preventDefault();
-    // console.log("values==>",values)
-    dispatch(addPost({id:uuid(),name:namePost,content:contentPost,email:emailPost,comments:[],}));
+    moment.locale('es')
+    const dateNow = moment().format('D MMM YYYY');
+    console.log("datenow==>", dateNow)
+    dispatch(addPost({id:uuid(),name:namePost,content:contentPost,email:emailPost,date:dateNow,comments:[],}));
     // cleanForm();
 	}
-
-  // function cleanForm(){
-  //   setNamePost("");
-  //   setEmailPost("");
-  //   setContentPost("");
-  // }
   return (
     <div>
       <form className="create__post" onSubmit={handleAddPost} >
         <div className="create__post--title">Nuevo Post</div>
         <SimpleInput {...propsName} />
-        {/* <input className="create__post--name" value={namePost} onChange={(e)=>setNamePost(e.target.value)}/> */}
-        {/* <div className="create__post--content">contenido</div> */}
         <SimpleInput {...propsContent} />
         <SimpleInput {...propsEmail} />
-        {/* <input className="create__post--email" value={emailPost} onChange={(e)=>setEmailPost(e.target.value)}/> */}
-
         <button type="submit" className="create__post--button" disabled={!isEnabled}>
           Crear Post
         </button>

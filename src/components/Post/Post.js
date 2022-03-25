@@ -4,18 +4,15 @@ import like from "../../images/heart-regular.svg";
 import dislikeCheck from "../../images/dislike-solid.svg";
 import dislike from "../../images/dislike.svg";
 import commentIcon from "../../images/comment-regular.svg";
-import link from "../../images/link-solid.svg";
 import Modal from "../Modal/Modal";
 import "./Post.scss";
 import SimpleInput from '../SimpleInput/SimpleInput';
 import {addComentToPost} from "../../features/postSlice"
 import { useDispatch } from 'react-redux';
-import {v4 as uuid} from "uuid"
 
 function Post(props) {
-  console.log("post props==>",props)
-  const likes= 0;
-  const dislikes= 0;
+  const likes= 15;
+  const dislikes= 3;
 	const [postLiked, setPostLiked] = useState(false);
 	const [postDisliked, setPostDisliked] = useState(false);
 	const [likeNumber, setLikeNumber] = useState(likes);
@@ -74,33 +71,38 @@ function Post(props) {
 	}
   return (
     <div className='post'>
-      <div className='post__owner'>Posted by: {post.email}</div>
       <div className='post__main'>
-        <div className='post__main--name'>{post.name}</div>
-        <div className='post__main--image'>imagen</div>
+        <div className='post__main--group'>
+          <div className='post__main--name'>{post.name}</div>
+          <div className='post__main--email'>{post.email} - {post.date}</div>
+        </div>
         <div className='post__main--content'>{post.content}</div>
+        <div className='post__main--image'>imagen</div>
       </div>
       <div className='post__punctuation'>
-        <div className="post__punctuation--likes">{likeNumber} Me gusta</div>
-        <div className="post__punctuation--dislikes">{dislikeNumber} No me gusta</div>
+        <div className="post__punctuation--comment">
+				  <img className="post__punctuation--comment-img" src={commentIcon} alt="comments" onClick={() => openModal()} />
+          15
+        </div>
+        <div className="post__punctuation--likes">
+          <img
+            className='post__punctuation--likes-img'
+            src={postLiked ? likeCheck : like}
+            alt="like"
+            onClick={() => changeLike()}
+          />
+          <span className='hola'>{likeNumber}</span>
+        </div>
+        <div className="post__punctuation--dislikes">
+          <img
+            className='post__punctuation--dislikes-img'
+            src={postDisliked ? dislikeCheck : dislike}
+            alt="dislike"
+            onClick={() => changeDislike()}
+          />
+          {dislikeNumber}
+        </div>
       </div>
-      <div className='post__sub'>
-        <img
-          className='post__sub--img'
-					src={postLiked ? likeCheck : like}
-					alt="like"
-					onClick={() => changeLike()}
-        />
-        <img
-          className='post__sub--img'
-					src={postDisliked ? dislikeCheck : dislike}
-					alt="dislike"
-					onClick={() => changeDislike()}
-        />
-				<img className="post__sub--comment" src={commentIcon} alt="comments" onClick={() => openModal()} />
-        <img className="post__sub--link" src={link} alt="link" />
-      </div>
-      <div className='post__date'>Posted: 12/08/2019</div>
       {showModal && (
 				<Modal>
           <div>Nuevo Comentario</div>
