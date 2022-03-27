@@ -5,17 +5,9 @@ import {selectPostsList} from '../../features/postSlice'
 
 function Home(props) {
   const postsList = useSelector(selectPostsList)
-
-  console.log("postsList==>",postsList)
+  console.log("postlist==>",postsList)
   return (
     <div className='postscontainer'>
-      {/* {postsList && postsList.map((post,index)=>{
-        return <div key={index}>
-          <div>{post.name}</div>
-          <div>{post.content}</div>
-          <div>{post.email}</div>
-        </div>
-      })} */}
       {postsList && <PostList data={postsList}/>}
     </div>
   );

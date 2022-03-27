@@ -1,124 +1,82 @@
-import React,{useState} from 'react';
+import React, { useState } from "react";
 import likeCheck from "../../images/heart-solid.svg";
 import like from "../../images/heart-regular.svg";
 import dislikeCheck from "../../images/dislike-solid.svg";
 import dislike from "../../images/dislike.svg";
 import commentIcon from "../../images/comment-regular.svg";
-import Modal from "../Modal/Modal";
+import { useNavigate } from "react-router-dom";
 import "./Post.scss";
-import SimpleInput from '../SimpleInput/SimpleInput';
-import {addComentToPost} from "../../features/postSlice"
-import { useDispatch } from 'react-redux';
 
 function Post(props) {
-  const likes= 15;
-  const dislikes= 3;
+	const likes = 15;
+	const dislikes = 3;
 	const [postLiked, setPostLiked] = useState(false);
 	const [postDisliked, setPostDisliked] = useState(false);
 	const [likeNumber, setLikeNumber] = useState(likes);
 	const [dislikeNumber, setDislikeNumber] = useState(dislikes);
-	const [showModal, setShowModal] = React.useState(false);
-  const [name,setName] = useState("")
-  const [comment,setComment] = useState("")
-  const [email,setEmail] = useState("")
+	const navigate = useNavigate();
 
-  const {post} = props;
-  const changeLike = () => {
+	const { post } = props;
+	const changeLike = () => {
 		setPostLiked(!postLiked);
 		setLikeNumber(postLiked ? likes : likes + 1);
 	};
 
-  const changeDislike = () => {
+	const changeDislike = () => {
 		setPostDisliked(!postDisliked);
 		setDislikeNumber(postDisliked ? dislikes : dislikes + 1);
 	};
-  const openModal = () => {
-		setShowModal(true);
-	};
 
-	const closeModal = () => {
-		setShowModal(false);
-	};
-
-  const propsName = {
-		nombre: "Nombre",
-		tipo: "string",
-		max: 50,
-		complex: false,
-		setProperty: setName,
-	};
-  const propsComment = {
-		nombre: "Comentario",
-		tipo: "string",
-		max: 50,
-		complex: false,
-		setProperty: setComment,
-	};
-  const propsEmail = {
-		nombre: "Email",
-		tipo: "string",
-		max: 50,
-		complex: false,
-		setProperty: setEmail,
-	};
-
-  const dispatch = useDispatch();
-  function handleAddComment(event) {
-		event.preventDefault();
-    console.log("post props ==>",props)
-    dispatch(addComentToPost({id:post.id,name,comment,email}));
-    closeModal()
+	function goToAddCommentView() {
+		navigate(`/addcomment/${post.id}`);
 	}
-  return (
-    <div className='post'>
-      <div className='post__main'>
-        <div className='post__main--group'>
-          <div className='post__main--name'>{post.name}</div>
-          <div className='post__main--email'>{post.email} - {post.date}</div>
-        </div>
-        <div className='post__main--content'>{post.content}</div>
-        <div className='post__main--image'>imagen</div>
-      </div>
-      <div className='post__punctuation'>
-        <div className="post__punctuation--comment">
-				  <img className="post__punctuation--comment-img" src={commentIcon} alt="comments" onClick={() => openModal()} />
-          15
-        </div>
-        <div className="post__punctuation--likes">
-          <img
-            className='post__punctuation--likes-img'
-            src={postLiked ? likeCheck : like}
-            alt="like"
-            onClick={() => changeLike()}
-          />
-          <span className='hola'>{likeNumber}</span>
-        </div>
-        <div className="post__punctuation--dislikes">
-          <img
-            className='post__punctuation--dislikes-img'
-            src={postDisliked ? dislikeCheck : dislike}
-            alt="dislike"
-            onClick={() => changeDislike()}
-          />
-          {dislikeNumber}
-        </div>
-      </div>
-      {showModal && (
-				<Modal>
-          <div>Nuevo Comentario</div>
-          <SimpleInput {...propsName}/>
-          <SimpleInput {...propsComment}/>
-          <SimpleInput {...propsEmail}/>
-					<button className="modal__button" onClick={handleAddComment}>
-						AGREGAR
-					</button>
-					<button className="modal__button" onClick={() => closeModal()}>
-						CANCEL
-					</button>
-				</Modal>
-			)}
-    </div>
-  );
+
+  function goToPostDetailsView() {
+		navigate(`/postdetails/${post.id}`);
+	}
+	return (
+		<div className="post">
+			<div className="post__main">
+				<div className="post__main--group">
+					<div className="post__main--name" onClick={goToPostDetailsView}>{post.name}</div>
+					<div className="post__main--email">
+						{post.email} - {post.date}
+					</div>
+				</div>
+				<div className="post__main--content">{post.content}</div>
+				<div className="post__main--image">imagen</div>
+			</div>
+			<div className="post__punctuation">
+				<div className="post__punctuation--comment">
+					<img
+						className="post__punctuation--comment-img"
+						src={commentIcon}
+						alt="comments"
+						onClick={goToAddCommentView}
+					/>
+					15
+				</div>
+				<div className="post__punctuation--likes">
+					<img
+						className="post__punctuation--likes-img"
+						src={postLiked ? likeCheck : like}
+						alt="like"
+						onClick={() => changeLike()}
+					/>
+					<span className="hola">{likeNumber}</span>
+				</div>
+				<div className="post__punctuation--dislikes">
+					<img
+						className="post__punctuation--dislikes-img"
+						src={postDisliked ? dislikeCheck : dislike}
+						alt="dislike"
+						onClick={() => changeDislike()}
+					/>
+					{dislikeNumber}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default Post;

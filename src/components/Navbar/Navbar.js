@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   const [displayOptions,setDisplayOptions] =useState(false)
-  console.log("displayoptions=>",displayOptions)
 	return (
 		<div className="navbar__container">
 			<div className="navbar__container--logo">

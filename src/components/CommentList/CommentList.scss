@@ -1,0 +1,23 @@
+.commentlist{
+  margin: 0 auto;
+  width: 45vw;
+  background-color: rgb(233, 252, 246);
+  margin-bottom: 2rem;
+
+  &__title{
+		display: flex;
+		align-items: center;
+		justify-content:flex-start;
+
+		font-size: 4vh;
+		// padding-top: 2rem;
+    margin-left: 3rem;
+		color: #126fe9;
+  }
+}
+.no__comments{
+	margin: 0 auto;
+	padding: 2rem 3rem;
+	font-size: 3vh;
+  text-align: center;
+}

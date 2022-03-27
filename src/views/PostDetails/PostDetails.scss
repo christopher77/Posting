@@ -1,0 +1,23 @@
+$yellow:#FDDC05;
+$white: #fff;
+.postdetails__container{
+  margin: 0 auto;
+  width: 45vw;
+  background-color: rgb(233, 252, 246);
+  position: relative;
+}
+
+.backhome{
+  position: fixed;
+  bottom: 10vh;
+  width: 20%;
+  left: 75vw;
+  height: 50px;
+  border-radius: 10px;
+  color: $white;
+  background-color: $yellow;
+  border-color: $yellow;
+  cursor: pointer;
+  font-size: 2.1vh;
+  text-transform: uppercase;
+}
