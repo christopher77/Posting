@@ -1,27 +1,54 @@
-.navbar__container{
+.navbar{
+  position: absolute;
+  top: 0;
+  width: 100vw;
   display: flex;
-  background-color: aqua;
+  background-color: rgb(90, 221, 221);
   height: 8vh;
   align-items: center;
+  justify-content: space-between;
 
-  &>*{
-    // background-color: brown;
-    display: flex;
-    align-items: center;
-    height: 100%;
+  &__logo{
+    color: white;
+    text-decoration: none;
+    margin-left: 2vw;
+    font-size: 30px;
+    line-height: 80px;
+  }
+
+  &__right{
+    &--list{
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
+  }
+
+  &__item{
+    margin-right: 20px;
     width: 10vw;
-    padding-left: 20px;
-  }
-  &--logo{
-  }
-
-  &--public{
-
-  }
-
-  &--menu{
-    position: relative;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+
+    &:hover{
+      background-color: rgb(33, 33, 206);
+      height: 6vh;
+      margin-top: 1vh;
+      border-radius: 10px;
+    }
+
+    &--link,
+    &--simple{
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+    }
+    .reference{
+      position: relative;
+    }
   }
 }
 
@@ -29,23 +56,30 @@
   position: absolute;
   display: flex;
   flex-direction: column;
+  align-items: center;
   top: 0;
-  background-color: coral;
+  background-color: rgb(90, 221, 221);
   overflow: hidden;
-  left: 0;
+  right: 0;
   width: 10vw;
+  margin-top: 1vh;
+  margin-right: 20px;
+  border-radius: 10px;
 }
 
 .menu__item{
-  height: 8vh;
+  height: 6vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  width: 100%;
   text-decoration: none;
-  padding-left: 20px;
 
 
   &:hover{
-    background-color:darkgreen;
+    background-color:rgb(115, 206, 115);
     color: aliceblue;
   }
 }

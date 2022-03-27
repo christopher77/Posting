@@ -27,6 +27,7 @@ function Post(props) {
 		setDislikeNumber(postDisliked ? dislikes : dislikes + 1);
 	};
 
+	const postAmount = post.comments.length;
 	function goToAddCommentView() {
 		navigate(`/addcomment/${post.id}`);
 	}
@@ -54,7 +55,7 @@ function Post(props) {
 						alt="comments"
 						onClick={goToAddCommentView}
 					/>
-					15
+					{postAmount}
 				</div>
 				<div className="post__punctuation--likes">
 					<img
