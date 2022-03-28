@@ -45,7 +45,7 @@ function Post(props) {
 					</div>
 				</div>
 				<div className="post__main--content">{post.content}</div>
-				<div className="post__main--image">imagen</div>
+				{/* <div className="post__main--image">imagen</div> */}
 			</div>
 			<div className="post__punctuation">
 				<div className="post__punctuation--comment">

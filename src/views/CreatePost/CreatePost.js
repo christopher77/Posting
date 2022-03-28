@@ -62,8 +62,8 @@ function CreatePost(props) {
 				<SimpleInput {...propsName} />
 				<SimpleInput {...propsContent} />
 				<SimpleInput {...propsEmail} />
-				<label for="image-post">Sube una foto(opcional):</label>
-				<input type="file" id="image-post" name="image-post" accept="image/png, image/jpeg"/>
+				{/* <label for="image-post">Sube una foto(opcional):</label>
+				<input type="file" id="image-post" name="image-post" accept="image/png, image/jpeg"/> */}
 				<button
 					type="submit"
 					className="create__post--button"
