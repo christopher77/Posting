@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [displayOptions,setDisplayOptions] =useState(false)
+  const navigate = useNavigate();
+
 	return (
-		<div className="navbar__container">
-			<div className="navbar__container--logo">
-				<Link to="/">Logo</Link>
-			</div>
-			<div className="navbar__container--public">
-				<Link to="/create-post">Publicar Post</Link>
-			</div>
-			<div className="navbar__container--menu" onClick={() => setDisplayOptions(!displayOptions)}	>
-				Menu
-        {displayOptions &&<DropdownMenu/>}
-			</div>
-		</div>
+    <nav className="navbar">
+      <Link to="/" className="navbar__logo">Logo
+        <img src="" className="navbar__logo--iamge"/>
+      </Link>
+      <div className="navbar__right">
+        <ul className="navbar__right--list">
+          <li className="navbar__item" onClick={()=>navigate("/create-post")}>
+            <Link to="/create-post" className="navbar__item--link"  >Publicar Post</Link>
+          </li>
+          <li className="navbar__item" onClick={() => setDisplayOptions(!displayOptions)}>
+            <div className="navbar__item--simple reference">Menu</div>
+            {displayOptions &&<DropdownMenu/>}
+          </li>
+        </ul>
+      </div>
+    </nav>
 	);
 }
+
 function DropdownMenu(){
 
   function DropdownItem(props){

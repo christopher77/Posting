@@ -24,7 +24,7 @@ function CreatePost(props) {
 	const propsContent = {
 		nombre: "Contenido",
 		tipo: "string",
-		max: 50,
+		max: 500,
 		complex: false,
 		setProperty: setContentPost,
 	};
@@ -62,6 +62,8 @@ function CreatePost(props) {
 				<SimpleInput {...propsName} />
 				<SimpleInput {...propsContent} />
 				<SimpleInput {...propsEmail} />
+				{/* <label for="image-post">Sube una foto(opcional):</label>
+				<input type="file" id="image-post" name="image-post" accept="image/png, image/jpeg"/> */}
 				<button
 					type="submit"
 					className="create__post--button"
