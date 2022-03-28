@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import SimpleInput from '../../components/SimpleInput/SimpleInput';
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import {addComentToPost} from "../../features/postSlice"
 import moment from "moment";
 import "moment/locale/es";
 import "./AddComment.scss";
+import {selectPostsList} from '../../features/postSlice'
 
 function AddComment(props) {
   const [name,setName] = useState("")
@@ -15,6 +16,14 @@ function AddComment(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {id} = useParams();
+  const postsList = useSelector(selectPostsList)
+
+  let postFound = {};
+  postsList.forEach((post)=>{
+    if(post.id===id){
+      postFound= post;
+    }
+  })
 
   const propsName = {
 		nombre: "Nombre",
@@ -50,8 +59,11 @@ function AddComment(props) {
   return (
     <div className='comment__container'>
       <form className='add__comment' onSubmit={handleAddComment}>
-        <div>Nuevo Comentario</div>
-        <div>en: {}</div>
+        <div className='add__comment--title'>Nuevo Comentario en el post:
+          <div className='add__comment--main'>
+          "{postFound.name}"
+          </div>
+        </div>
         <SimpleInput {...propsName}/>
         <SimpleInput {...propsComment}/>
         <SimpleInput {...propsEmail}/>
